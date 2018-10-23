@@ -24,7 +24,10 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.route("/timestamp").get((req, res) => res.send(new Date()))
+processDate
+
+
+app.route("/timestamp/").get((req, res) => res.send(new Date()))
 
 
 
