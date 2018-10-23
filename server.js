@@ -26,10 +26,11 @@ app.get("/api/hello", function (req, res) {
 
 const processDate = timestampParams => {
   //return timestampParams
-  const date = new Date(timestampParams.time)
-  return date
-  if (date == "Invalid Date") return {error: date}
-  //return {unix: date.getTime(), utc: date.toUTCString()}
+  if (timestampParams.hasOwnProperty("time")) {var date = new Date(timestampParams.time)}
+  else {var date = new Date()}
+  
+  if (date == "Invalid Date") return {error: date.toUTCString()}
+  return {unix: date.getTime(), utc: date.toUTCString()}
 }
 
 
