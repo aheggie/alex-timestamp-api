@@ -24,18 +24,21 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-const processDate = timestampStr => {
-  const date = new Date(timestampStr)
+const processDate = timestampParams => {
+  //return timestampParams
+  const date = new Date(timestampParams.time)
+  return date
   if (date == "Invalid Date") return {error: date}
-  return {unix: date.getTime(), utc: date.toUTCString()}
+  //return {unix: date.getTime(), utc: date.toUTCString()}
 }
 
 
-app.route("/timestamp/")
-  .get( (req, res) => 
-       res.send(
-                processDate("2012-12-25")
+app.route("/timestamp/:time?")
+  .get( (req, res) => {
+       res.json(
+                processDate(req.params)
                )
+}
       )
 
 
