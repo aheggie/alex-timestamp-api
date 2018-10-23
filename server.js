@@ -25,21 +25,16 @@ app.get("/api/hello", function (req, res) {
 });
 
 const processDate = timestampParams => {
-  //return timestampParams
-  if (timestampParams.hasOwnProperty("time")) {var date = new Date(timestampParams.time)}
-  else {var date = new Date()}
-  
+  const date = timestampParams.date_string === undefined ? new Date() : new Date(timestampParams.date_string)
   if (date == "Invalid Date") return {error: date.toUTCString()}
   return {unix: date.getTime(), utc: date.toUTCString()}
 }
 
 
-app.route("/timestamp/:time?")
-  .get( (req, res) => {
-       res.json(
-                processDate(req.params)
-               )
-}
+app
+  .route("/timestamp/:date_string?")
+  .get( (req, res) => 
+       res.json(processDate(req.params))
       )
 
 
