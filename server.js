@@ -26,7 +26,7 @@ app.get("/api/hello", function (req, res) {
 
 const processDate = timestampParams => {
   const date = timestampParams.date_string === undefined ? new Date() : new Date(timestampParams.date_string)
-  if (date.toUTCString() == "Invalid Date") return {error: date.toUTCString()}
+  if (date.toUTCString() == "Invalid Date") return {error: date.toUTCString(), unix: date.getTime(), entry: timestampParams.date_string, wtf: new Date(timestampParams.date_string)}
   return {unix: date.getTime(), utc: date.toUTCString()}
 }
 
