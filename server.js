@@ -32,7 +32,7 @@ const processDate = timestampParams => {
 
 
 app
-  .route("/timestamp/:date_string?")
+  .route("api/timestamp/:date_string?")
   .get( (req, res) => 
        res.json(processDate(req.params))
       )
