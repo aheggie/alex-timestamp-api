@@ -24,9 +24,15 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+//this converts a string to a number, if the string can be a number
+const numberIfPossible = potentialNumberStr => {
+  if (!isNaN(potentialNumberStr)) return Number(potentialNumberStr)
+  return potentialNumberStr
+}
+
 const processDate = timestampParams => {
-  const date = timestampParams.date_string === undefined ? new Date() : new Date(timestampParams.date_string)
-  if (date.toUTCString() == "Invalid Date") return {error: date.toUTCString(), unix: date.getTime(), entry: timestampParams.date_string, wtf: new Date(timestampParams.date_string)}
+  const date = timestampParams.date_string === undefined ? new Date() : new Date(numberIfPossible(timestampParams.date_string))
+  if (date.toUTCString() == "Invalid Date") return {error: date.toUTCString()}
   return {unix: date.getTime(), utc: date.toUTCString()}
 }
 
